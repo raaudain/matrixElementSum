@@ -2,26 +2,22 @@
 
 // Given matrix, a rectangular matrix of integers, where each value represents the cost of the room, your task is to return the total sum of all rooms that are suitable for the CodeBots (ie: add up all the values that don't appear below a 0).
 
+// I had to use nested for loops
+
 function matrixElementsSum(matrix) {
-    const rooms = [];
-    const floors = matrix.length
-    const belowHaunted = []
-
-    for (let num of matrix) {
-        rooms.push(...num);
-    }
-
-    for (let i = 0; i < rooms.length; i++) {
-        // console.log(rooms[i])
-        if (i < rooms.length/floors) {
-            belowHaunted.push(rooms[i])
-        }
-        
-        if (rooms[i] === 0 && Number.isFinite(i)) {
-            console.log(i, rooms[i], i + rooms.length/floors, rooms[i + rooms.length/floors])
-            // belowHaunted.push(i + rooms.length/floors)
-            // belowHaunted.push(rooms[])
-            belowHaunted.push(rooms[i + rooms.length/floors])
+    let price = 0;
+    const haunted = [];
+    
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] === 0) {
+                haunted.push(j)
+            }
+            else if(haunted.indexOf(j) === -1) {
+                price += matrix[i][j]
+            }
         }
     }
+    
+    return price;
 }
